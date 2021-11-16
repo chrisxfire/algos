@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Diagnostics.Contracts;
+using System.Text;
 
 namespace Algorithms;
 public class StringAlgorithms {
@@ -199,5 +200,66 @@ public class QueueAlgorithms {
             queue.Enqueue(current * 10 + 1); // Append a 1 to the end of current * 10 (10), making 11, and enqueue it.
         }
         Console.WriteLine();
+    }
+
+    public class Node { // This is also a tree.
+        public Node Left { get; set; }
+        public Node Right { get; set; }
+        public int Data { get; set; }
+    }
+
+    public class BinaryTree {
+        static void PreOrderTraversal(Node root) {
+            if (root == null) { return; }
+
+            Console.WriteLine(root.Data + " ");
+
+            PreOrderTraversal(root.Left);
+            PreOrderTraversal(root.Right);
+        }
+        static void InOrderTraversal(Node root) {
+            if (root == null) { return; }
+
+            InOrderTraversal(root.Left);
+            Console.WriteLine(root.Data + " ");
+            InOrderTraversal(root.Right);
+        }
+        static void PostOrderTraversal(Node root) {
+            if (root == null) { return; }
+            PostOrderTraversal(root.Left);
+            PostOrderTraversal(root.Right);
+            Console.WriteLine(root.Data + " ");
+        }
+
+        public class BinarySearchTree {
+            public static Node Insert(Node root, int value) {
+                if (root == null) { // If we don't already have a root, the inputted value should be the root.
+                    root = new Node();
+                    root.Data = value;
+                    return root;
+                } else {
+                    if (value < root.Data) { // Insert on left
+                        root.Left = Insert(root.Left, value);
+                    } else if (value > root.Data) { // Insert on right
+                        root.Right = Insert(root.Right, value);
+                    }
+
+                }
+                return root;
+            }
+
+            // Search a binary search tree with node root for value:
+            public static Boolean Contains(Node root, int value) { 
+                if (root == null) { // Tree is empty.
+                    return false;
+                } else if (value < root.Data) { // If the value we're searching for is less than the root, search the left side of the tree and return it:
+                    return Contains(root.Left, value);
+                } else if (value > root.Data) {  // Otherwise, search the right side:
+                    return Contains(root.Right, value);
+                } else { // The root must be equal to the value, so just return true:
+                    return true;
+                }
+            }
+        }
     }
 }

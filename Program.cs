@@ -184,7 +184,7 @@ public class LinkedListAlgorithms {
     }
 }
 
-public class QueueAndStackAlgorithms {
+public class QueueAlgorithms {
     // Print the first n binary numbers:
     static void PrintBinary(int n) {
         if (n <= 0) { return; }

@@ -1,9 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.Data;
-using System.Linq;
-using System.Reflection.Metadata.Ecma335;
-using System.Runtime.CompilerServices;
-using System.Text;
+﻿using System.Text;
 
 namespace Algorithms;
 public class StringAlgorithms
@@ -152,8 +147,8 @@ public class LinkedListAlgorithms
             {
                 head = null;
             }
-            Node slow = head;
-            Node fast = head;
+            Node? slow = head;
+            Node? fast = head;
             Node? prev = null;
 
             while (fast != null)
@@ -168,8 +163,8 @@ public class LinkedListAlgorithms
         {
             if (head == null || n == 0) { return; }
 
-            Node first = head;
-            Node second = head;
+            Node? first = head;
+            Node? second = head;
 
             for (int i = 0; i < n; i++)
             {
@@ -191,5 +186,26 @@ public class LinkedListAlgorithms
             }
             first.next = first.next.next;
         }
+    }
+}
+
+public class QueueAndStackAlgorithms
+{
+    // Print the first n binary numbers:
+    static void PrintBinary(int n)
+    {
+        if (n <= 0) { return; }
+
+        Queue<int> queue = new Queue<int>();
+        queue.Enqueue(1);
+        // Assume n = 5.
+        for (int i = 0; i < n; i++)
+        {
+            int current = queue.Dequeue(); // current == 1
+            Console.WriteLine(current);
+            queue.Enqueue(current * 10); // Append a 0 to the end of current, making 1 -> 10, and enqueue it.
+            queue.Enqueue(current * 10 + 1); // Append a 1 to the end of current * 10 (10), making 11, and enqueue it.
+        }
+        Console.WriteLine();
     }
 }
